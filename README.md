@@ -1,7 +1,7 @@
 # Projection of Video Game Sales
 
 ### Summary
-We will analyze and attempt to understand what factors play a role in the global sales of different video games from 2007-2016. We will look at different platforms video games are played on, the genre of each game, and rating and their influence on global sales. We will be using a data set from kaggle.com
+We will analyze and attempt to understand what factors play a role in the global sales of different video games from 2007-2016. We will look at the different platforms video games are played on, the genre of each game, and rating, to determine their influence on global sales. We will be using a data set from kaggle.com
 
 ### Project Members
 1. <b> [Joseph Hart](https://github.com/joseh4) </b>
