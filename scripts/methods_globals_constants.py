@@ -1,3 +1,25 @@
+def build_interaction(data, target, interact):
+    """
+    When given a dataframe will add interactions base on specified columns names
+    
+    Parameters
+    ----------
+    data :  Dataframe 
+    target : Column to use for interactions (string)
+    interact : Columns by name to create interaction columns from (string)
+    
+    Returns
+    -------
+    a dataframe with interactions
+    """
+
+    #Add the interaction for Adevnture and platform
+    for col in interact:
+        data[f'{target}_IN_{col}'] = data[target]  * data.loc[:, col]
+        
+    return data
+
+
 def fillna_average_by_target_column(row, avg_dict, target_col, effected_col):
     """
     When given a row of a dataframe, this method will use the target column to fill nan values with 
@@ -37,59 +59,6 @@ GENRE_CRITIC_SCORE_AVG = {'Sports' : video_game_df[video_game_df['Genre'] == 'Sp
               'Adventure' : video_game_df[video_game_df['Genre'] == 'Adventure']['Critic_Score'].mean(),
               'Strategy' : video_game_df[video_game_df['Genre'] == 'Strategy']['Critic_Score'].mean(),
 }
-
-GENRE_CRITIC_COUNT_AVG = {'Sports' : video_game_df[video_game_df['Genre'] == 'Sports']['Critic_Count'].mean(),
-              'Platform': video_game_df[video_game_df['Genre'] == 'Platform']['Critic_Count'].mean(),
-              'Racing': video_game_df[video_game_df['Genre'] == 'Racing']['Critic_Count'].mean(),
-              'Role-Playing': video_game_df[video_game_df['Genre'] == 'Role-Playing']['Critic_Count'].mean(),
-              'Puzzle': video_game_df[video_game_df['Genre'] == 'Puzzle']['Critic_Count'].mean(),
-              'Misc': video_game_df[video_game_df['Genre'] == 'Misc']['Critic_Count'].mean(),
-              'Shooter': video_game_df[video_game_df['Genre'] == 'Shooter']['Critic_Count'].mean(),
-              'Simulation': video_game_df[video_game_df['Genre'] == 'Simulation']['Critic_Count'].mean(),
-              'Action': video_game_df[video_game_df['Genre'] == 'Action']['Critic_Count'].mean(),
-              'Fighting': video_game_df[video_game_df['Genre'] == 'Fighting']['Critic_Count'].mean(),
-              'Adventure' : video_game_df[video_game_df['Genre'] == 'Adventure']['Critic_Count'].mean(),
-              'Strategy' : video_game_df[video_game_df['Genre'] == 'Strategy']['Critic_Count'].mean(),
-}
-
-
-# Fix user score to get the average values
-video_game_df['User_Score'] = video_game_df['User_Score'].replace(to_replace = 'tbd', value = np.nan).astype(float)
-
-GENRE_USER_SCORE_AVG = {'Sports' : video_game_df[video_game_df['Genre'] == 'Sports']['User_Score'].mean(),
-              'Platform': video_game_df[video_game_df['Genre'] == 'Platform']['User_Score'].mean(),
-              'Racing': video_game_df[video_game_df['Genre'] == 'Racing']['User_Score'].mean(),
-              'Role-Playing': video_game_df[video_game_df['Genre'] == 'Role-Playing']['User_Score'].mean(),
-              'Puzzle': video_game_df[video_game_df['Genre'] == 'Puzzle']['User_Score'].mean(),
-              'Misc': video_game_df[video_game_df['Genre'] == 'Misc']['User_Score'].mean(),
-              'Shooter': video_game_df[video_game_df['Genre'] == 'Shooter']['User_Score'].mean(),
-              'Simulation': video_game_df[video_game_df['Genre'] == 'Simulation']['User_Score'].mean(),
-              'Action': video_game_df[video_game_df['Genre'] == 'Action']['User_Score'].mean(),
-              'Fighting': video_game_df[video_game_df['Genre'] == 'Fighting']['User_Score'].mean(),
-              'Adventure' : video_game_df[video_game_df['Genre'] == 'Adventure']['User_Score'].mean(),
-              'Strategy' : video_game_df[video_game_df['Genre'] == 'Strategy']['User_Score'].mean(),
-}
-
-GENRE_USER_COUNT_AVG = {'Sports' : video_game_df[video_game_df['Genre'] == 'Sports']['User_Count'].mean(),
-              'Platform': video_game_df[video_game_df['Genre'] == 'Platform']['User_Count'].mean(),
-              'Racing': video_game_df[video_game_df['Genre'] == 'Racing']['User_Count'].mean(),
-              'Role-Playing': video_game_df[video_game_df['Genre'] == 'Role-Playing']['User_Count'].mean(),
-              'Puzzle': video_game_df[video_game_df['Genre'] == 'Puzzle']['User_Count'].mean(),
-              'Misc': video_game_df[video_game_df['Genre'] == 'Misc']['User_Count'].mean(),
-              'Shooter': video_game_df[video_game_df['Genre'] == 'Shooter']['User_Count'].mean(),
-              'Simulation': video_game_df[video_game_df['Genre'] == 'Simulation']['User_Count'].mean(),
-              'Action': video_game_df[video_game_df['Genre'] == 'Action']['User_Count'].mean(),
-              'Fighting': video_game_df[video_game_df['Genre'] == 'Fighting']['User_Count'].mean(),
-              'Adventure' : video_game_df[video_game_df['Genre'] == 'Adventure']['User_Count'].mean(),
-              'Strategy' : video_game_df[video_game_df['Genre'] == 'Strategy']['User_Count'].mean(),
-}
-
-
-PUBLISHER_GLOBAL_AVG = {}
-
-for publisher in global_df['Publisher'].unique():
-    PUBLISHER_GLOBAL_AVG[publisher] = global_df[global_df['Publisher'] == publisher]['Global_Sales'].mean()
-
 
 STYLE = {'purple' : '\033[95m',
                'cyan' : '\033[96m',
