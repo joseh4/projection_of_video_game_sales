@@ -44,8 +44,38 @@ def fillna_average_by_target_column(row, avg_dict, target_col, effected_col):
         
     return row
 
-
-
+def create_frequency_wide_df(data, col_a, col_b, ints=False):
+    """
+    Given 2 columns and a dataframe, this method can create new dataframe that can be used to make a wide style dataframe 
+    betweem the values in columns A and B. It counts the frequency of values
+    
+    Parameters
+    ----------
+    col_a : [String] : column that will be indexed
+    col_b : [String] : column where all unique values will be new columns in the new dataframe
+    data : [Pandas Dataframe] : the dataframe
+    ints : [Boolean] : Determine rather to fill nulls with zeros and convert dataframe values to integers 
+    
+    Returns
+    ----------
+    dataframe in wide style
+    """
+    
+    # Create a new dataframe h
+    df = pd.DataFrame(data.groupby(col_a)[col_b].value_counts())
+    
+    #rename column b to represent what it is 
+    df.rename(columns={col_b : "value_counts"}, inplace=True)
+    
+    #Reset index get dataframe in a form where the pivot method will work correctly
+    df.reset_index(inplace=True)
+    df = df.pivot(index=col_a, columns=col_b, values='value_counts')
+    
+    if ints == True:
+        df = df.fillna(0).astype('int32')   
+    
+    return df
+"""
 GENRE_CRITIC_SCORE_AVG = {'Sports' : video_game_df[video_game_df['Genre'] == 'Sports']['Critic_Score'].mean(),
               'Platform': video_game_df[video_game_df['Genre'] == 'Platform']['Critic_Score'].mean(),
               'Racing': video_game_df[video_game_df['Genre'] == 'Racing']['Critic_Score'].mean(),
@@ -73,4 +103,4 @@ STYLE = {'purple' : '\033[95m',
 }
 
 
-NUMERICS = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
+NUMERICS = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']"""
