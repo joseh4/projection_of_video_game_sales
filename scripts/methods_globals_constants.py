@@ -75,6 +75,9 @@ def create_frequency_wide_df(data, col_a, col_b, ints=False):
         df = df.fillna(0).astype('int32')   
     
     return df
+	
+	
+NUMERICS = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
 """
 GENRE_CRITIC_SCORE_AVG = {'Sports' : video_game_df[video_game_df['Genre'] == 'Sports']['Critic_Score'].mean(),
               'Platform': video_game_df[video_game_df['Genre'] == 'Platform']['Critic_Score'].mean(),
@@ -101,6 +104,4 @@ STYLE = {'purple' : '\033[95m',
                'underline' : '\033[4m',
                'end' : '\033[0m'
 }
-
-
-NUMERICS = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']"""
+"""
