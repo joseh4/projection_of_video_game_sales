@@ -1,12 +1,12 @@
-def build_interaction(data, target, interact):
+def build_interactions(data, target, interact):
     """
     When given a dataframe will add interactions base on specified columns names
     
     Parameters
     ----------
-    data :  Dataframe 
-    target : Column to use for interactions (string)
-    interact : Columns by name to create interaction columns from (string)
+    data 		: [Pandas Dataframe] 	: data used to make interactions  
+    target 		: [String] 				: Column name to use for interactions
+    interact 	: [list of string] 		: Columns by name to create interaction columns from (
     
     Returns
     -------
@@ -27,10 +27,10 @@ def fillna_average_by_target_column(row, avg_dict, target_col, effected_col):
     
     Parameters
     ----------
-    row :  Dataframe row.
-    avg_dict : A dictionary of the average of the catagorical values in the target column of the dataframe
-    target_col : index of where the target column is in the dataframe
-    effected_col :  index of where the effected column is in the dataframe
+    row 			: Dataframe row.
+    avg_dict 		: A dictionary of the average of the catagorical values in the target column of the dataframe
+    target_col 		: index of where the target column is in the dataframe
+    effected_col 	: index of where the effected column is in the dataframe
     
     Returns
     -------
@@ -75,6 +75,37 @@ def create_frequency_wide_df(data, col_a, col_b, ints=False):
         df = df.fillna(0).astype('int32')   
     
     return df
+	
+def feature_extract_mean_count_median(df, columns, target, return_trig=[True, True, True]):
+    """
+    Using a dataframe this method can get the mean, median, and count of any columns specified in relation 
+    to a target variable. The columns must be catagorical 
+    
+    Parameters
+    ----------
+    df          : [Pandas Dataframe] : Dataframe/Data.
+    columns     : [List of Strings]  : list of catagory column names
+    target      : [String]           : index of where the target column is in the dataframe
+    return_trig : [List of Boolean]  : triggers for what extractions to  perform.
+                                       Index 1 = Counts, index 2 = mean, index 3 = median 
+    
+    Returns
+    -------
+    a dataframe with new features mean, median, and count for all catagorical columns and specfied triggers
+    """
+    
+    for name in columns:
+        if return_trig[0] == True:
+            _ =  df[name].value_counts()
+            df[f'{name}_Count'] = df[name].map(lambda value: _[value])
+        if return_trig[1] == True:
+            _ =  df.groupby(name).mean()[target]
+            df[f'{name}_Mean'] = df[name].map(lambda value: _[value])
+        if return_trig[2] == True:
+            _ =  df.groupby(name).median()[target]
+            df[f'{name}_Median'] = df[name].map(lambda value: _[value])
+
+    return df   
 	
 	
 NUMERICS = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
