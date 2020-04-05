@@ -15,8 +15,7 @@ We will analyze and attempt to understand what factors play a role in the global
 4. Run a linear regression model on the variables.
 
 ### Slide Presentation
-<b>[Presentation Slides]
- (https://github.com/joseh4/projection_of_video_game_sales/blob/joe/Understanding%20what%20Drives%20Video%20Games%20Sales.pdf) </b>
+<b>[Presentation Slides](https://github.com/joseh4/projection_of_video_game_sales/blob/joe/Understanding%20what%20Drives%20Video%20Games%20Sales.pdf) </b>
 
 ### Conclusion
 We need more data to effectively decide what factors play a role in video games sales. We were not able to definitvely say one variable has a greater influence on global sales over another. Some data that could help would be budget for each game, popularity prior to release, marketing budget for each game, and development time. 
