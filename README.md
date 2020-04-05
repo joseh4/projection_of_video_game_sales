@@ -15,7 +15,6 @@ We will analyze and attempt to understand what factors play a role in the global
 4. Run a linear regression model on the variables.
 
 ### Slide Presentation
-
 <b>[Presentation Slides]
  (https://github.com/joseh4/projection_of_video_game_sales/blob/joe/Understanding%20what%20Drives%20Video%20Games%20Sales.pdf) </b>
 
